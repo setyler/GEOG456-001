@@ -22,13 +22,13 @@ crossorigin=""></script>
     <h4>Basic Leaflet Map</h4>
     <div id="map"></div>
     <script> 
-        var map = L.map('map').setView([36, -79], 13);
+        var map = L.map('map').setView([35.764787, -82.265059], 13);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
         var marker = L.marker([35.9999518, -78.9999389]).addTo(map);
-        marker.bindPopup("<b>Hello world!</b><br>I am a popup").openPopup();
+        marker.bindPopup("<b>Mount Mitchell</b><br>This is the highest peak east of the Mississippi").openPopup();
         var circle = L.circle([36.0011, -79], {
             color: 'red',
             fillColor: '#f03',
