@@ -16,11 +16,15 @@ crossorigin=""></script>
 </style>
 <body>
     <h2>GEOG 456-001 Assessment 2</h2>
-    <h3>Leaflet Map</h3>
+    <a href = "https://en.wikipedia.org/wiki/Hurricane_Sam"><h3>Hurricane Sam 2021</h3></a>
     February 1, 2024 
     <br>Suzanne Tyler
 
     <div id="map"></div>
+
+    <h3>Hurrican Image</h3>
+    <a href = "https://en.wikipedia.org/wiki/File:Sam_2021-09-26_1625Z.jpg"><img src = "sam.jpg"></a> 
+
     <script src="./data/waypoints.js"></script>
     <script>
 
@@ -78,7 +82,7 @@ crossorigin=""></script>
         //     "Carolina Hall": marker 
         // };
 
-        var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
+        var layerControl = L.control.layers(baseMaps).addTo(map);
 
     </script>
 </body>
