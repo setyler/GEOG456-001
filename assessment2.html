@@ -12,7 +12,7 @@ crossorigin=""/>
 integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
 crossorigin=""></script>
 <style>
-    #map { height: 500px;  }
+    #map { height: 500px;  width: 500px}
 </style>
 <body>
     <h2>GEOG 456-001 Assessment 2</h2>
@@ -20,7 +20,7 @@ crossorigin=""></script>
     February 1, 2024 
     <br>Suzanne Tyler
 
-    <div id="map", height = 600px, width = 600px></div>
+    <div id="map"></div>
 
     <h3>Hurricane Sam Image</h3>
     <a href = "https://en.wikipedia.org/wiki/File:Sam_2021-09-26_1625Z.jpg"><img src = "sam.jpg"; height = 500px></a> 
@@ -36,7 +36,7 @@ crossorigin=""></script>
         // Locations from JS 
         var sam = hurricanes.features
         var center = [38, -43]
-        var map = L.map('map').setView(center, 4);
+        var map = L.map('map').setView(center, 2);
 
         var markerCoords = [0, 0]
         var marker = L.marker([35.911276,-79.05004]).bindPopup("<b>Hurricane Sam did not get very close to land</b>").addTo(map);
