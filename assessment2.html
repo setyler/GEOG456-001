@@ -35,8 +35,8 @@ crossorigin=""></script>
 
         // Locations from JS 
         var sam = hurricanes.features
-        var center = [10.0, -35]
-        var map = L.map('map').setView(center, 17);
+        var center = [38, -43]
+        var map = L.map('map').setView(center, 4);
 
         // var marker = L.marker([35.911276,-79.05004]).bindPopup("<b>Carolina Hall</b>").addTo(map);
         
@@ -45,10 +45,10 @@ crossorigin=""></script>
                         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                     }).addTo(map);
 
-        // var Esri_OceanBasemap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}', {
-        //     attribution: 'Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri',
-        //     maxZoom: 13
-        // }).addTo(map);
+        var Esri_OceanBasemap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri',
+            maxZoom: 13
+        }).addTo(map);
         
                     // L.geoJSON(waypoints).addTo(map);
 
@@ -69,7 +69,7 @@ crossorigin=""></script>
 
         var baseMaps = {
             "Open Street Map": OSM,
-            // "Ocean Base Map": Esri_OceanBasemap
+            "Ocean Base Map": Esri_OceanBasemap
         };
         
         // var overlayMaps = {
