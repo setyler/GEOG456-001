@@ -35,7 +35,7 @@ crossorigin=""></script>
         // Locations from JS 
         var sam = hurricanes.features
 
-        var map = L.map('map').setView(sam[0].geomestry.coordinates, 17);
+        var map = L.map('map').setView(10.0, -35, 17);
 
         var OSM = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         maxZoom: 19,
