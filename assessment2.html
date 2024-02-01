@@ -48,36 +48,32 @@ crossorigin=""></script>
                         maxZoom: 19,
                         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                     }).addTo(map);
+
+        var Esri_OceanBasemap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri',
+            maxZoom: 13
+        }).addTo(map);
         
                     // L.geoJSON(waypoints).addTo(map);
 
-                    var geojsonMarkerOptions = {
-                        radius: 8,
-                        fillColor: "#7BAFD4",
-                        color: "#000",
-                        weight: 1,
-                        opacity: 1,
-                        fillOpacity: 0.8
-                    };
+        var geojsonMarkerOptions = {
+            radius: 8,
+            fillColor: "#7BAFD4",
+            color: "#000",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8
+        };
 
-                    var points = L.geoJSON(sam, {
-                        pointToLayer: function (feature, latlng) {
-                            return L.circleMarker(latlng, geojsonMarkerOptions);
-                        }
-                    }).addTo(map);
-        
-                    // var lon = waypoints.features[0].geometry.coordinates[0]
-                    // var lat = waypoints.features[0].geometry.coordinates[1]
-                    
-                    // var coord = [lat, lon]
-                    // var point = L.marker(coord).addTo(map)
-                    // var myA = waypoints.features.map(e => e)
-                    // var cOnly = waypoints.features.map(a => a.geometry.coordinates) 
+        var points = L.geoJSON(sam, {
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, geojsonMarkerOptions);
+            }
+        }).addTo(map);
 
-                    // a is each object inside the given array 
         var baseMaps = {
             "Open Street Map": OSM,
-            "Esri Images": Esri_WorldImagery
+            "Ocean Base Map": Esri_OceanBasemap
         };
         
         // var overlayMaps = {

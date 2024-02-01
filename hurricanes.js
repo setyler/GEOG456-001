@@ -1,4 +1,4 @@
-var hurricanes = 
+var hurricanes =
 
 {
     "type": "FeatureCollection",
