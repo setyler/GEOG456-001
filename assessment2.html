@@ -39,8 +39,7 @@ crossorigin=""></script>
         var center = [35.17380831799959, -40.25390625000001]
         var map = L.map('map').setView(center, 3);
 
-        var markerCoords = [0, 0]
-        var marker = L.marker([18.221361899839767,-63.04753303527833]).bindPopup("<b>Hurricane Sam did not get very close to land</b>").addTo(map);
+        var marker = L.marker([18.221361899839767,-63.04753303527833]).bindPopup("<b>Hurricane Sam did not make landfall</b>").addTo(map);
         
         var OSM = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -80,5 +79,6 @@ crossorigin=""></script>
         var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
 
     </script>
+    
 </body>
 </html>
