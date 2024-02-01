@@ -36,7 +36,7 @@ crossorigin=""></script>
         var sam = hurricanes.features
 
         var map = L.map('map').setView(sam[0].geomestry.coordinates, 17);
-        
+
         var OSM = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         maxZoom: 19,
                         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -60,11 +60,11 @@ crossorigin=""></script>
                         fillOpacity: 0.8
                     };
 
-                    // var myWaypoints = L.geoJSON(waypoints, {
-                    //     pointToLayer: function (feature, latlng) {
-                    //         return L.circleMarker(latlng, geojsonMarkerOptions);
-                    //     }
-                    // }).addTo(map);
+                    var points = L.geoJSON(sam, {
+                        pointToLayer: function (feature, latlng) {
+                            return L.circleMarker(latlng, geojsonMarkerOptions);
+                        }
+                    }).addTo(map);
         
                     // var lon = waypoints.features[0].geometry.coordinates[0]
                     // var lat = waypoints.features[0].geometry.coordinates[1]
