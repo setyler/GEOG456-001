@@ -23,17 +23,19 @@ crossorigin=""></script>
     <div id="map"></div>
 
     <h3>Hurrican Image</h3>
-    <a href = "https://en.wikipedia.org/wiki/File:Sam_2021-09-26_1625Z.jpg"><img src = "sam.jpg"></a> 
+    <a href = "https://en.wikipedia.org/wiki/File:Sam_2021-09-26_1625Z.jpg"><img src = "sam.jpg"; height = 500px></a> 
 
-    <script src="./data/waypoints.js"></script>
+    <script src="./hurricanes.js"></script>
     <script>
 
         var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
         });
 
-        var CarolinaHall = [35.911276, -79.05004]
-        var map = L.map('map').setView(CarolinaHall, 17);
+        // Locations from JS 
+        var sam = hurricanes.features
+
+        var map = L.map('map').setView(sam, 17);
         var OSM = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         maxZoom: 19,
                         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
