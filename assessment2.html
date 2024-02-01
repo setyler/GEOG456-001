@@ -22,7 +22,7 @@ crossorigin=""></script>
 
     <div id="map"></div>
 
-    <h3>Hurrican Image</h3>
+    <h3>Hurricane Sam Image</h3>
     <a href = "https://en.wikipedia.org/wiki/File:Sam_2021-09-26_1625Z.jpg"><img src = "sam.jpg"; height = 500px></a> 
 
     <script src="./hurricanes.js"></script>
@@ -35,7 +35,8 @@ crossorigin=""></script>
         // Locations from JS 
         var sam = hurricanes.features
 
-        var map = L.map('map').setView(sam, 17);
+        var map = L.map('map').setView(sam[0].geomestry.coordinates, 17);
+        
         var OSM = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         maxZoom: 19,
                         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
