@@ -20,7 +20,7 @@ crossorigin=""></script>
     February 1, 2024 
     <br>Suzanne Tyler
 
-    <div id="map"></div>
+    <div id="map", height = 600px, width = 600px></div>
 
     <h3>Hurricane Sam Image</h3>
     <a href = "https://en.wikipedia.org/wiki/File:Sam_2021-09-26_1625Z.jpg"><img src = "sam.jpg"; height = 500px></a> 
@@ -38,22 +38,17 @@ crossorigin=""></script>
         var center = [10.0, -35]
         var map = L.map('map').setView(center, 17);
 
-        // var OSM = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        //                 maxZoom: 19,
-        //                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        //             }).addTo(map);
-        
-        var marker = L.marker([35.911276,-79.05004]).bindPopup("<b>Carolina Hall</b>").addTo(map);
+        // var marker = L.marker([35.911276,-79.05004]).bindPopup("<b>Carolina Hall</b>").addTo(map);
         
         var OSM = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         maxZoom: 19,
                         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                     }).addTo(map);
 
-        var Esri_OceanBasemap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}', {
-            attribution: 'Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri',
-            maxZoom: 13
-        }).addTo(map);
+        // var Esri_OceanBasemap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}', {
+        //     attribution: 'Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri',
+        //     maxZoom: 13
+        // }).addTo(map);
         
                     // L.geoJSON(waypoints).addTo(map);
 
@@ -66,15 +61,15 @@ crossorigin=""></script>
             fillOpacity: 0.8
         };
 
-        var points = L.geoJSON(sam, {
-            pointToLayer: function (feature, latlng) {
-                return L.circleMarker(latlng, geojsonMarkerOptions);
-            }
-        }).addTo(map);
+        // var points = L.geoJSON(sam, {
+        //     pointToLayer: function (feature, latlng) {
+        //         return L.circleMarker(latlng, geojsonMarkerOptions);
+        //     }
+        // }).addTo(map);
 
         var baseMaps = {
             "Open Street Map": OSM,
-            "Ocean Base Map": Esri_OceanBasemap
+            // "Ocean Base Map": Esri_OceanBasemap
         };
         
         // var overlayMaps = {
