@@ -36,7 +36,7 @@ crossorigin=""></script>
         // Locations from JS 
         var sam = hurricanes.features
         var center = [38, -43]
-        var map = L.map('map').setView(center, 2);
+        var map = L.map('map').setView(center, 3);
 
         var markerCoords = [0, 0]
         var marker = L.marker([18.256740912815104,-63.05191040039063]).bindPopup("<b>Hurricane Sam did not get very close to land</b>").addTo(map);
@@ -53,7 +53,7 @@ crossorigin=""></script>
         
         var geojsonMarkerOptions = {
             radius: 8,
-            fillColor: "#7BAFD4",
+            fillColor: "#eb124a",
             color: "#000",
             weight: 1,
             opacity: 1,
@@ -76,7 +76,7 @@ crossorigin=""></script>
             "Landfall": marker 
         };
 
-        var layerControl = L.control.layers(baseMaps).addTo(map);
+        var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
 
     </script>
 </body>
