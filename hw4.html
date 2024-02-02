@@ -5,11 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suzanne Tyler - Homework 4</title>
 </head>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js">
 <body>
     <h4>Homework 4: Convert a Dataset to a GeoJSON or JSON</h4>
     Dataset: Commute Mode by State and Year
-    <br>Source: <a href = https://www.bts.gov/browse-statistical-products-and-data/state-transportation-statistics/commute-mode>Bureau of Transportation Statistics</a>
-    <br><a href="transit.csv">CSV</a>
-    <br><a href="transit2.json">GeoJSON</a>
+    Source: <a href = "https://www.bts.gov/browse-statistical-products-and-data/state-transportation-statistics/commute-mode">Bureau of Transportation Statistics</a>
+    <a href="transit.csv">CSV</a>
+    <a href="transit2.json">GeoJSON</a>
 </body>
+
+const fileUrl = "https://raw.githubusercontent.com/setyler/GEOG456-001/main/transit.csv"
+
+let myResult
+
+Papa.parse(fileUrl, {
+    download: true,
+    header: true,
+    complete: function(result) {
+        // console.log(result.data)
+    myResult = result.data
+    }
+})
+
+</script>
+
+<script></script> 
+
 </html>
