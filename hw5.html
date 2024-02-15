@@ -9,17 +9,20 @@
     <title>Suzanne Tyler - Homework 5</title>
 </head>
 
-<script>
-    // input geojason 
-    // var data = 
-    // make array 
-    // var array = 
-</script>
-
 <body>
     <h4>Homework 4: Make a meaningful array from your GeoJSON</h4>
 
-    <h3 onclick="console.log(data)">Click here!</h3>
+    <script src = "transit.geojson">
+
+    var data = "transit.geojson"
+    var coordinates = data.features.map(e=>e.geometry.coordinates)
+
+    function click() {
+        console.log(coordinates)
+    }
+    </script>
+    
+    <h3 onclick="click()">Click here!</h3>
 
 </body>
 </html>
