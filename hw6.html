@@ -1,12 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suzanne Tyler - Homework 6</title>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
 </head>
+<script src="transit.js"></script>
+
 <body>
-    <h3>Homework 6</h3>
-    
+
+<h2>Homework 6: Make a Table</h2>
+<h3>Data Types Included in Dataset</h3>
+
+<table id= "mytable">
+  <tr>
+    <th>Area</th>
+    <th>Data</th>
+  </tr>
+</table>
+
 </body>
+<script>
+  var x = document.getElementById('mytable')
+
+  for (var i=0; i<data.length; i++){
+    var myNewRow = document.createElement('tr')
+    var myNewCell1 = document.createElement('td')
+    var myNewCell2 = document.createElement('td')
+    myNewCell1.innerText = data[i].State;
+    myNewCell2.innerText = data[i].Mode;
+    
+    myNewRow.append(myNewCell1)
+    myNewRow.append(myNewCell2)
+    x.append(myNewRow)
+  }
+</script>
+
+
 </html>
