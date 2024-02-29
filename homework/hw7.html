@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suzanne Tyler - Homework 7</title>
-</head>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
 integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
@@ -13,11 +12,13 @@ crossorigin=""/>
 integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
 crossorigin=""></script>
 
-<scrip src = "data/publicTrans.geoJSON/"></scrip>
+<script src = "./pt.js"></script>
 
 <style> 
     #map {height: 500px; width: 800px}
 </style>
+
+</head>
 
 <body>
     <h2>Homework 7: Make a Leaflet Map with a Slider Conotrolled Temporal Element</h2>
@@ -30,17 +31,18 @@ crossorigin=""></script>
 
     <div id="map"></div> 
     <script> 
+
         var map = L.map('map').setView([38.548165, -96.503906], 4);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19, 
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
+        }).addTo(map); 
 
         var selectedYear = "2010"
 
         function myStyle(feature) {
             return {
-                "fillColor": getColor(feature.properties[selectedYear]), // no way this isn't wrong 
+                "fillColor": getColor(feature.properties[selectedYear]), 
                 "color": "black",
                 "weight": 0.75,
                 "opacity": 2.0,
@@ -55,16 +57,16 @@ crossorigin=""></script>
             : "#08306b";
         }
 
-        var publicTrans = L.geoJSON(publicTrans, {style: myStyle}).addTo(map)
+        var publicTransit = L.geoJSON(pt, {style: myStyle}).addTo(map);
 
-        function moveSlider(value) {
-            selectedYear = value; // this changes the value of the selectedYear variable
-            map.removeLayer(publicTrans);// leaflet method to remove a layer / 
-            publicTrans = L.geoJSON(aws, {style: myStyle});
-            map.addLayer(publicTrans); // add the new layer
-            document.getElementById('theYear').innerHTML = 'Year: '+ value  
-        }
-        moveSlider('2010')
+        // function moveSlider(value) {
+        //     selectedYear = value; 
+        //     map.removeLayer(publicTransit); // leaflet method to remove a layer
+        //     publicTransit = L.geoJSON(publicTransit, {style: myStyle});
+        //     map.addLayer(publicTransit); // add the new layer
+        //     document.getElementById('theYear').innerHTML = 'Year: '+ value  
+        // }
+        // moveSlider('2010')
 
     </script>
 
