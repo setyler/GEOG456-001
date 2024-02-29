@@ -24,7 +24,7 @@ crossorigin=""></script>
     <h3>Percent Public Transit Commutes by Year</h3>
     <h3 id = "theYear">Year</h3>
 
-        <input type="range" name="year" value="2012" min="2012" max="2020" oninput="moveSlider(this.value)">
+        <input type="range" name="year" value="2010" min="2010" max="2022" oninput="moveSlider(this.value)">
         <div id="map"></div>
         <div class="legend"></div>
 
@@ -38,24 +38,24 @@ crossorigin=""></script>
 
         var selectedYear = "2010"
 
-        // function myStyle(feature) {
-        //     return {
-        //         "fillColor": getColor(feature.properties[selectedYear]), // no way this isn't wrong 
-        //         "color": "black",
-        //         "weight": 0.75,
-        //         "opacity": 2.0,
-        //         "fillOpacity": 0.7
-        //     }
-        // }
+        function myStyle(feature) {
+            return {
+                "fillColor": getColor(feature.properties[selectedYear]), // no way this isn't wrong 
+                "color": "black",
+                "weight": 0.75,
+                "opacity": 2.0,
+                "fillOpacity": 0.7
+            }
+        }
 
-        // function getColor(percent) { 
-        //     return percent < 2 ? "#f7fbff" 
-        //     :percent < 5 ? "#9ecae1" 
-        //     :percent < 10 ? "#4292c6"
-        //     : "#08306b";
-        // }
+        function getColor(percent) { 
+            return percent < 2 ? "#f7fbff" 
+            :percent < 5 ? "#9ecae1" 
+            :percent < 10 ? "#4292c6"
+            : "#08306b";
+        }
 
-        var publicTrans = L.geoJSON(publicTrans).addTo(map)
+        var publicTrans = L.geoJSON(publicTrans.features).addTo(map)
 
         function moveSlider(value) {
             selectedYear = value; // this changes the value of the selectedYear variable
@@ -64,7 +64,7 @@ crossorigin=""></script>
             map.addLayer(publicTrans); // add the new layer
             document.getElementById('theYear').innerHTML = 'Year: '+ value  
         }
-        moveSlider('2012')
+        moveSlider('2010')
 
     </script>
 
