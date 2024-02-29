@@ -9,7 +9,7 @@
 <body>
     <script>
         let myResult
-        const fileUrl = "https://raw.githubusercontent.com/setyler/GEOG456-001/main/transit2.csv"
+        const fileUrl = "https://raw.githubusercontent.com/setyler/GEOG456-001/main/data/transit3.csv"
         Papa.parse(fileUrl, {
             download: true,
             header: true,
@@ -18,14 +18,13 @@
                 myResult = result.data
             }
         })
-
     </script>
 
     <h4>Homework 4: Convert a Dataset to a GeoJSON or JSON</h4>
     Dataset: Commute Mode by State and Year
     <br><a href="https://www.bts.gov/browse-statistical-products-and-data/state-transportation-statistics/commute-mode">Source</a>
-    <br><a href="https://raw.githubusercontent.com/setyler/GEOG456-001/main/transit.csv">CSV</a>
-    <br><a href="https://raw.githubusercontent.com/setyler/GEOG456-001/main/transit.geojson">GeoJSON</a>
+    <br><a href="https://raw.githubusercontent.com/setyler/GEOG456-001/main/data/transit.csv">CSV</a>
+    <br><a href="https://raw.githubusercontent.com/setyler/GEOG456-001/main/data/transit.geojson">GeoJSON</a>
  
 </body>
 
