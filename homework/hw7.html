@@ -13,8 +13,7 @@ crossorigin=""/>
 integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
 crossorigin=""></script>
 
-<script src = "data/transit.js"></script>
-<script src = "data/transit.geojson"></script>
+<scrip src = "data/publicTrans.geoJSON/"></scrip>
 
 <style> 
     #map {height: 500px; width: 800px}
@@ -29,7 +28,7 @@ crossorigin=""></script>
         <div id="map"></div>
         <div class="legend"></div>
 
-    <div id="map"></div>
+    <div id="map"></div> 
     <script> 
         var map = L.map('map').setView([38.548165, -96.503906], 4);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -37,26 +36,35 @@ crossorigin=""></script>
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-        var selectedYear = '2010'
+        var selectedYear = "2010"
 
-        function myStyle(feature) {
-            return {
-                "fillColor": getColor(feature.properties[selectedYear]),
-                "color": "black",
-                "weight": 0.75,
-                "opacity": 2.0,
-                "fillOpacity": 0.7
-            }
+        // function myStyle(feature) {
+        //     return {
+        //         "fillColor": getColor(feature.properties[selectedYear]), // no way this isn't wrong 
+        //         "color": "black",
+        //         "weight": 0.75,
+        //         "opacity": 2.0,
+        //         "fillOpacity": 0.7
+        //     }
+        // }
+
+        // function getColor(percent) { 
+        //     return percent < 2 ? "#f7fbff" 
+        //     :percent < 5 ? "#9ecae1" 
+        //     :percent < 10 ? "#4292c6"
+        //     : "#08306b";
+        // }
+
+        var publicTrans = L.geoJSON(publicTrans).addTo(map)
+
+        function moveSlider(value) {
+            selectedYear = value; // this changes the value of the selectedYear variable
+            map.removeLayer(publicTrans);// leaflet method to remove a layer / 
+            publicTrans = L.geoJSON(aws, {style: myStyle});
+            map.addLayer(publicTrans); // add the new layer
+            document.getElementById('theYear').innerHTML = 'Year: '+ value  
         }
-
-        function getColor(percent) {
-            return percent < 25 ? "#f7fbff" 
-            :waterConsumption < 50 ? "#9ecae1" 
-            :waterConsumption < 75 ? "#4292c6"
-            : "#08306b";
-        };
-
-        var publicTrans = L.geoJSON(transit, {style: myStyle}).addTo(map)
+        moveSlider('2012')
 
     </script>
 
