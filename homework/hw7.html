@@ -12,10 +12,22 @@ crossorigin=""/>
 integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
 crossorigin=""></script>
 
-<script src = "./pt.js"></script>
+<script src = "../pt.js"></script>
 
 <style> 
-    #map {height: 500px; width: 800px}
+    #map {height: 400px; width: 700px} 
+    .legend {
+        line-height: 18px;
+        color: #000;
+        background-color: #ffffff;
+    }
+    .legend i {
+        width: 18px;
+        height: 18px;
+        float: left;
+        margin-right: 8px;
+        opacity: 0.7; 
+    }
 </style>
 
 </head>
@@ -30,6 +42,8 @@ crossorigin=""></script>
         <div class="legend"></div>
 
     <div id="map"></div> 
+    <h3><a href = "https://www.bts.gov/browse-statistical-products-and-data/state-transportation-statistics/commute-mode">Data Source</a></h3>
+
     <script> 
 
         var map = L.map('map').setView([38.548165, -96.503906], 4);
@@ -51,22 +65,49 @@ crossorigin=""></script>
         }
 
         function getColor(percent) { 
-            return percent < 2 ? "#f7fbff" 
-            :percent < 5 ? "#9ecae1" 
-            :percent < 10 ? "#4292c6"
+            return percent <= 1 ? "#f7fbff" 
+            :percent <= 2 ? "#9ecae1" 
+            :percent <= 5 ? "#4292c6"
             : "#08306b";
         }
 
-        var publicTransit = L.geoJSON(pt, {style: myStyle}).addTo(map);
+        var publicTransit = L.geoJSON(pt, {style: myStyle}).addTo(map); 
 
-        // function moveSlider(value) {
-        //     selectedYear = value; 
-        //     map.removeLayer(publicTransit); // leaflet method to remove a layer
-        //     publicTransit = L.geoJSON(publicTransit, {style: myStyle});
-        //     map.addLayer(publicTransit); // add the new layer
-        //     document.getElementById('theYear').innerHTML = 'Year: '+ value  
-        // }
-        // moveSlider('2010')
+        function moveSlider(value) {
+            selectedYear = value; 
+            map.removeLayer(publicTransit); // leaflet method to remove a layer
+            publicTransit = L.geoJSON(pt, {style: myStyle});
+            map.addLayer(publicTransit); // add the new layer
+            document.getElementById('theYear').innerHTML = 'Year: '+ value  
+        }
+        moveSlider('2010')
+
+        var legendTitle = L.control({position: 'bottomright'});
+            legendTitle.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info');
+                this.update();
+                return this._div;
+            };
+
+            legendTitle.update = function (props) {
+                this._div.innerHTML = '<h3><u>Percent Commutes on Public Transit</u></h3>';
+            };
+            legendTitle.addTo(map);
+
+        var legend = L.control({position: 'bottomright'});
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'info legend'),
+                grades = [0, 1, 2, 5],
+                labels = [];
+
+            for (var i = 0; i < grades.length; i++) {
+                div.innerHTML +=
+                    '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                    grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '%'+ '<br>' : '+%');
+            }
+            return div;
+        };
+        legend.addTo(map);
 
     </script>
 
