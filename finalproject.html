@@ -12,7 +12,7 @@
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
 
-    <script src = "data/final_data.js"></script>
+    <script src = "./data/final_data_2.js"></script>
         
     <style> 
         #map {height: 400px; width: 700px} 
@@ -56,6 +56,12 @@
 
     <h3>Ridership Recovery from January 2021 - March 2024</h3>
 
+    <h4 id = "theDate">Month</h4>
+
+        <input type="range" name="year" value="BR2021_01" min="BR2021_01" max="BR2024_03" oninput="moveSlider(this.value)">
+        <div id="map"></div>
+        <div class="legend"></div>
+
     <div id="map"></div> 
 
     <script> 
@@ -66,9 +72,43 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map); 
 
+        var selectedMonth = 'BR2021_01'
         
-    
+        // loop to add points to map 
+
+        var pointsLayer = new L.FeatureGroup();
+        pointsLayer.addTo(map);
+        createLayer();
+
+        function createLayer(selectedMonth) {
+            for (let i = 0; i < 604; i++) {
+                circle = L.circleMarker([data[i].lat, data[i].long]).addTo(pointsLayer)
+                circle.setStyle({color:getColor(data[i][selectedMonth]), radius: 3})
+                circle.addTo(pointsLayer)
+            }
+        }
+
+        function getColor(value) { 
+            if (value > 0) {
+                return 'blue'
+            } else {
+                return 'gray'
+            }
+        }
+
+        function moveSlider(value) {
+            selectedMonth = value; 
+            map.removeLayer(pointsLayer); // leaflet method to remove a layer
+            pointsLayer = new L.FeatureGroup();
+            pointsLayer.addTo(map)
+            createLayer(selectedMonth);
+            //map.addLayer(pointsLayer); // add the new layer
+            document.getElementById('theDate').innerHTML = 'Date: '+ value   
+        }
+        moveSlider('BR2021_01')
+
     </script>
+
 
 </body>
 </html>
