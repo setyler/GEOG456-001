@@ -12,10 +12,10 @@
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
 
-    <script src = "./data/final_data_2.js"></script>
+    <script src = "./data/final_data_.js"></script>
         
     <style> 
-        #map {height: 400px; width: 700px} 
+        #map {height: 500px; width: 600px} 
         .legend {
             line-height: 18px;
             color: #000;
@@ -56,17 +56,17 @@
 
     <h3>Ridership Recovery from January 2021 - March 2024</h3>
 
-    <h4 id = "theDate">Month</h4>
+    <h4 id = "theDate"></h4>
 
-        <input type="range" name="year" value="BR2021_01" min="BR2021_01" max="BR2024_03" oninput="moveSlider(this.value)">
-        <div id="map"></div>
+        <input id="slider" step = "1" type="range" name="date" value="1" min="1" max="37" oninput="moveSlider(this.value)">
         <div class="legend"></div>
+        <div id = "sliderValue"></div>
 
     <div id="map"></div> 
 
     <script> 
 
-        var map = L.map('map').setView([35.911646069992585, -79.05229568481447], 12.5);
+        var map = L.map('map').setView([35.926312628505954, -79.05246734619142], 12.2);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19, 
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -74,12 +74,6 @@
 
         var selectedMonth = 'BR2021_01'
         
-        // loop to add points to map 
-
-        var pointsLayer = new L.FeatureGroup();
-        pointsLayer.addTo(map);
-        createLayer();
-
         function createLayer(selectedMonth) {
             for (let i = 0; i < 604; i++) {
                 circle = L.circleMarker([data[i].lat, data[i].long]).addTo(pointsLayer)
@@ -87,6 +81,18 @@
                 circle.addTo(pointsLayer)
             }
         }
+
+        function createLayer(selectedMonth) {
+            var pointsLayer = new L.FeatureGroup();
+            for (let i = 0; i < 604; i++) {
+                circle = L.circleMarker([data[i].lat, data[i].long]).addTo(pointsLayer)
+                circle.setStyle({color:getColor(data[i][selectedMonth]), radius: 3})
+                circle.addTo(pointsLayer)
+            }
+            return pointsLayer; 
+        }
+
+        var layer1 = createLayer(selectedMonth).addTo(map);
 
         function getColor(value) { 
             if (value > 0) {
@@ -96,14 +102,58 @@
             }
         }
 
+        const slider = document.getElementById("slider");
+        const sliderValueDisplay = document.getElementById("sliderValue");
+
+        
+        const sliderValues = [
+        "2021 January",
+        "2021 March",
+        "2021 April",
+        "2021 May",
+        "2021 June",
+        "2021 July",
+        "2021 September",
+        "2021 October",
+        "2021 November",
+        "2021 December",
+        "2022 January",
+        "2022 February",
+        "2022 March",
+        "2022 April",
+        "2022 May",
+        "2022 June",
+        "2022 July",
+        "2022 August",
+        "2022 September",
+        "2022 October",
+        "2022 November",
+        "2022 December",
+        "2023 January",
+        "2023 February",
+        "2023 March",
+        "2023 April",
+        "2023 May",
+        "2023 June",
+        "2023 July",
+        "2023 August",
+        "2023 September",
+        "2023 October",
+        "2023 November",
+        "2023 December",
+        "2024 January",
+        "2024 February",
+        "2024 March\r"
+        ]
+
         function moveSlider(value) {
-            selectedMonth = value; 
-            map.removeLayer(pointsLayer); // leaflet method to remove a layer
-            pointsLayer = new L.FeatureGroup();
-            pointsLayer.addTo(map)
-            createLayer(selectedMonth);
-            //map.addLayer(pointsLayer); // add the new layer
-            document.getElementById('theDate').innerHTML = 'Date: '+ value   
+            const sliderIndex = parseInt(slider.value) - 1;
+            sliderValueDisplay.textContent = sliderValues[sliderIndex];
+            selectedMonth = sliderValues[sliderIndex]; 
+            map.removeLayer(layer1)
+            layer1 = createLayer(selectedMonth);
+            layer1.addTo(map);
+            //document.getElementById('theDate').innerHTML = 'Date: '+ slider.value   
         }
         moveSlider('BR2021_01')
 
