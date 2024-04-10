@@ -1,135 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CHT COVID Ridership Recovery</title>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script>
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-    <script src = "./data/final_data_.js"></script>
-        
-    <style> 
-        #map {height: 500px; width: 600px} 
+    <script src="./data/final_data_.js"></script>
+    <script src="./data/small_data_2.js"></script>
+
+    <style>
+        #map {
+            height: 500px;
+            width: 600px
+        }
+
+        #map2 {
+            height: 500px;
+            width: 600px
+        }
 
         .legend {
             line-height: 18px;
             color: #000;
             background-color: #ffffff;
         }
+
         .legend i {
             width: 18px;
             height: 18px;
             float: left;
             margin-right: 8px;
-            opacity: 0.7; 
+            opacity: 0.7;
         }
+
         .slidecontainer {
-    width: 95%;
-    }
+            width: 95%;
+        }
 
-    .slider {
-    -webkit-appearance: none;
-    width: 50%;
-    height: 25px;
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-    }
+        .slider {
+            -webkit-appearance: none;
+            width: 50%;
+            height: 25px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
 
-    .slider:hover {
-    opacity: 1;
-    }
+        .slider:hover {
+            opacity: 1;
+        }
 
-    .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    background: #0000FF;
-    cursor: pointer;
-    }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            background: #0000FF;
+            cursor: pointer;
+        }
 
-    .slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    background: #0000FF;
-    cursor: pointer;
-    }
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            background: #0000FF;
+            cursor: pointer;
+        }
     </style>
 
 </head>
+
 <body>
 
     <h2>Chapel Hill Transit Ridership Recovery Post COVID-19</h2>
-    GEOG-456 Final Project - Suzanne Tyler <br> 
-    
-    Data for this project was provided by <a href = "https://www.townofchapelhill.org/Home/Components/StaffDirectory/StaffDirectory/1300/703?sortn=STitle&alpha=D&sortd=asc">Carolina Dwyer</a>, Planning Manager for Chapel Hill Transit. 
+    GEOG-456 Final Project - Suzanne Tyler <br>
+
+    Data for this project was provided by <a
+        href="https://www.townofchapelhill.org/Home/Components/StaffDirectory/StaffDirectory/1300/703?sortn=STitle&alpha=D&sortd=asc">Carolina
+        Dwyer</a>, Planning Manager for Chapel Hill Transit.
 
     <h3>Introduction and Motivation</h3>
-    Public transportation was heavily impacted by the COVID-19 pandemic, and <a href = "https://www.axios.com/2023/12/14/public-trasnportation-transit-america-recovery-pandemic-covid">in many areas has failed to bounce back</a> to pre-pandemic levels. Chapel Hill Transit has yet to return to pre-pandemic employee numbers or route frequency. In this project, I have attempted to visualize the impact of COVID on bus ridership in Chapel Hill in order to analyze the continued impacts of the pandemic, and pinpoint where ridership remains low.<br>
+    Public transportation was heavily impacted by the COVID-19 pandemic, and <a
+        href="https://www.axios.com/2023/12/14/public-trasnportation-transit-america-recovery-pandemic-covid">in many
+        areas has failed to bounce back</a> to pre-pandemic levels. Chapel Hill Transit has yet to return to
+    pre-pandemic employee numbers or route frequency. In this project, I have attempted to visualize the impact of COVID
+    on bus ridership in Chapel Hill in order to analyze the continued impacts of the pandemic, and pinpoint where
+    ridership remains low.<br>
 
     <h3>Initial Impact of COVID-19 on Chapel Hill Transit</h3>
 
-    Between January 2020 and April 2020, 445 out of 583 operating bus stops in Chapel Hill were closed, leaving 138 open.<br><br>
-    <img src = "data/closures2_fin.png" width = 600px> <br><br>
+    Between January 2020 and April 2020, 445 out of 583 operating bus stops in Chapel Hill were closed, leaving 138
+    open.<br><br>
+    <img src="data/closures2_fin.png" width=600px> <br><br>
 
-    Ridership dropped by over 99% percent, from almost 45,000 average daily riders in January 2020 to less than 300 in April. Over 80% of all stops from Janurary 2020 saw a 100% decrease in ridersip. <br><br>
-    <img src = "data/covidRidership2.png" width = 600px><br><br>
+    Ridership dropped by over 99% percent, from almost 45,000 average daily riders in January 2020 to less than 300 in
+    April. Over 80% of all stops from Janurary 2020 saw a 100% decrease in ridersip. <br><br>
+    <img src="data/covidRidership2.png" width=600px><br><br>
 
-    When compared with the ridership density map, it is clear that the largest stops were among those with the largest decreaese in ridership. <br><br>
-    <img src = "data/density2.png" width = 600px><br><br>
+    When compared with the ridership density map, it is clear that the largest stops were among those with the largest
+    decreaese in ridership. <br><br>
+    <img src="data/density2.png" width=600px><br><br>
 
-    382 stops were reopened by January 2021, and by January 2022 over 500 were back in service. Ridership, however, has been much slower to recover. <br>
+    382 stops were reopened by January 2021, and by January 2022 over 500 were back in service. Ridership, however, has
+    been much slower to recover. <br>
 
     <h3>Ridership Recovery from January 2021 - March 2024</h3>
 
-    <h4 id = "theDate"></h4>
+    <h4 id="theDate"></h4>
 
-        <input id="slider" step = "1" class = "slider" type="range" name="date" value="1" min="1" max="37" oninput="moveSlider(this.value)">
-        <div class="legend"></div>
-        <div id = "sliderValue"></div>
+    <input id="slider" step="1" class="slider" type="range" name="date" value="1" min="1" max="37"
+        oninput="moveSlider(this.value)">
+    <div class="legend"></div>
+    <div id="sliderValue"></div>
 
-    <div id="map"></div> 
+    <div id="map"></div>
 
-    <script> 
+    <script>
 
         var map = L.map('map').setView([35.926312628505954, -79.05246734619142], 12.2);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19, 
+            maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map); 
+        }).addTo(map);
 
-        var selectedMonth = 'BR2021_01'
-        
-        function createLayer(selectedMonth) {
-            for (let i = 0; i < 604; i++) {
-                circle = L.circleMarker([data[i].lat, data[i].long]).addTo(pointsLayer)
-                circle.setStyle({color:getColor(data[i][selectedMonth]), radius: 3})
-                circle.addTo(pointsLayer)
-            }
-        }
+        var selectedMonth = 1
 
         function createLayer(selectedMonth) {
             var pointsLayer = new L.FeatureGroup();
             for (let i = 0; i < 604; i++) {
                 circle = L.circleMarker([data[i].lat, data[i].long]).addTo(pointsLayer)
-                circle.setStyle({color:getColor(data[i][selectedMonth]), radius: 3})
+                circle.setStyle({ color: getColor(data[i][selectedMonth]), radius: 3 })
                 circle.addTo(pointsLayer)
             }
-            return pointsLayer; 
+            return pointsLayer;
         }
 
         var layer1 = createLayer(selectedMonth).addTo(map);
 
-        function getColor(value) { 
+        function getColor(value) {
             if (value > 0) {
                 return 'blue'
             } else {
@@ -140,65 +155,159 @@
         const slider = document.getElementById("slider");
         const sliderValueDisplay = document.getElementById("sliderValue");
 
-        
         const sliderValues = [
-        "2021 January",
-        "2021 March",
-        "2021 April",
-        "2021 May",
-        "2021 June",
-        "2021 July",
-        "2021 September",
-        "2021 October",
-        "2021 November",
-        "2021 December",
-        "2022 January",
-        "2022 February",
-        "2022 March",
-        "2022 April",
-        "2022 May",
-        "2022 June",
-        "2022 July",
-        "2022 August",
-        "2022 September",
-        "2022 October",
-        "2022 November",
-        "2022 December",
-        "2023 January",
-        "2023 February",
-        "2023 March",
-        "2023 April",
-        "2023 May",
-        "2023 June",
-        "2023 July",
-        "2023 August",
-        "2023 September",
-        "2023 October",
-        "2023 November",
-        "2023 December",
-        "2024 January",
-        "2024 February",
-        "2024 March\r"
+            "2021 January",
+            "2021 March",
+            "2021 April",
+            "2021 May",
+            "2021 June",
+            "2021 July",
+            "2021 September",
+            "2021 October",
+            "2021 November",
+            "2021 December",
+            "2022 January",
+            "2022 February",
+            "2022 March",
+            "2022 April",
+            "2022 May",
+            "2022 June",
+            "2022 July",
+            "2022 August",
+            "2022 September",
+            "2022 October",
+            "2022 November",
+            "2022 December",
+            "2023 January",
+            "2023 February",
+            "2023 March",
+            "2023 April",
+            "2023 May",
+            "2023 June",
+            "2023 July",
+            "2023 August",
+            "2023 September",
+            "2023 October",
+            "2023 November",
+            "2023 December",
+            "2024 January",
+            "2024 February",
+            "2024 March\r"
         ]
 
         function moveSlider(value) {
             const sliderIndex = parseInt(slider.value) - 1;
             sliderValueDisplay.textContent = sliderValues[sliderIndex];
-            selectedMonth = sliderValues[sliderIndex]; 
+            selectedMonth = sliderValues[sliderIndex];
             map.removeLayer(layer1)
             layer1 = createLayer(selectedMonth);
             layer1.addTo(map);
-            //document.getElementById('theDate').innerHTML = 'Date: '+ slider.value   
         }
-        moveSlider('BR2021_01')
+        moveSlider(1)
+
+    </script>
+
+    <br><br>
+
+    <h3>Ridership Recovery of Top 100 Bus Stops</h3>
+
+    <input id="slider2" step="1" class="slider" type="range" name="date" value="1" min="1" max="37"
+        oninput="moveSlider2(this.value)">
+    <div id="sliderValue2"></div>
+    <div id="map2"></div>
+    <div class="legend"></div>
+
+    <script>
+
+        var map2 = L.map('map2').setView([35.926312628505954, -79.05246734619142], 12.2);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map2);
+
+        var selectedMonth2 = 1
+
+        function createLayer2(selectedMonth) {
+            var pointsLayer2 = new L.FeatureGroup();
+            for (let i = 0; i < 100; i++) {
+                circle = L.circleMarker([data2[i].lat, data2[i].long]).addTo(pointsLayer2)
+                circle.setStyle({ color: getColor(data2[i][selectedMonth]), radius: 4 })
+                circle.addTo(pointsLayer2)
+            }
+            return pointsLayer2;
+        }
+
+        var layer2 = createLayer2(selectedMonth2).addTo(map2);
+
+        function getColor(value) {
+            if (value > 0) {
+                return 'blue'
+            } else {
+                return 'gray'
+            }
+        }
+
+        const slider2 = document.getElementById("slider2");
+        const sliderValueDisplay2 = document.getElementById("sliderValue2");
+
+        const sliderValues2 = [
+            "2021 January",
+            "2021 March",
+            "2021 April",
+            "2021 May",
+            "2021 June",
+            "2021 July",
+            "2021 September",
+            "2021 October",
+            "2021 November",
+            "2021 December",
+            "2022 January",
+            "2022 February",
+            "2022 March",
+            "2022 April",
+            "2022 May",
+            "2022 June",
+            "2022 July",
+            "2022 August",
+            "2022 September",
+            "2022 October",
+            "2022 November",
+            "2022 December",
+            "2023 January",
+            "2023 February",
+            "2023 March",
+            "2023 April",
+            "2023 May",
+            "2023 June",
+            "2023 July",
+            "2023 August",
+            "2023 September",
+            "2023 October",
+            "2023 November",
+            "2023 December",
+            "2024 January",
+            "2024 February",
+            "2024 March\r"
+        ]
+
+        function moveSlider2(value) {
+            const sliderIndex2 = parseInt(slider2.value) - 1;
+            sliderValueDisplay2.textContent = sliderValues2[sliderIndex2];
+            selectedMonth2 = sliderValues2[sliderIndex2];
+            map2.removeLayer(layer2)
+            layer2 = createLayer2(selectedMonth2);
+            layer2.addTo(map2);
+        }
+        moveSlider2(1);
 
     </script>
 
     Next to dos: <br>
-    1. add percent or number recovered values to slider ? or just a few sentences with summary recovered ridership stats <br>
-    2. add legend to map <br> 
-    3. EC: create map for percent recovery values ? <br> 
-    4. Create map for the top 50 or 100 most frequented stops <br> 
+    1. add percent or number recovered values to slider ? or just a few sentences with summary recovered ridership stats
+    <br>
+    2. add legend to map <br>
+    3. EC: create map for percent recovery values ? <br>
 
 </body>
+
 </html>
