@@ -7,6 +7,7 @@
     <style>
         img{
             position: absolute;
+            
         }
     
         .visible {
@@ -16,6 +17,12 @@
         .hidden {
             visibility: hidden;
         }
+            #container {
+            position: relative;
+        }
+        #title {
+            text-align: center; /* Center the title */
+        }
     </style>
 </head>
 <body>
@@ -23,15 +30,22 @@
         <!-- notice that I added an onclick listener in the container div -->
     <!-- <div class = "hidden">2022</div>
     <div class = "visible">2018</div> -->
-    <img id="after" class="hidden" src="../figures/fin-2022.png" alt="" height="400px">
-    <img id='before' class="visible" src="../figures/fin-2018.png" alt="" height="400px">
+    <img id="after" class="hidden" src="../figures/fin-2022.png" alt="" height="400px" title = "2022">
+    <img id='before' class="visible" src="../figures/fin-2018.png" alt="" height="400px" title = "2018">
     </div>
     <script>
 
-        function myFunction(){
+function myFunction(){
             visibleImgs = document.querySelector('.visible') // gets the img that is visible and saves it in a variable named visibleImgs
             hiddenImgs = document.querySelector('.hidden').className = 'visible' // gets the img whose class is hidden and makes it class visible
             visibleImgs.className = 'hidden' // makes the img that was class visible, class hidden
+            
+            if (visibleImgs.id === 'before') {
+                document.getElementById('title').textContent = 'Beaufort, NC 2020';
+            } else {
+                document.getElementById('title').textContent = 'Beaufort, NC 2010';
+            }
+        
         }
     </script>
 </body>
