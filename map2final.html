@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHT COVID Ridership Recovery</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script src="./data/final_data_.js"></script>
+    <script src="./data/small_data_2.js"></script>
+
+    <style>
+        #map {
+            height: 425px;
+            width: 600px
+        }
+
+        #map2 {
+            height: 425px;
+            width: 600px
+        }
+
+        .legend {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+            font-size: 14px;
+        }
+        .legend-item {
+            margin-bottom: 5px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 10px;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .slidecontainer {
+            width: 95%;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 50%;
+            height: 25px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+
+        .slider:hover {
+            opacity: 1;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            background: #0000FF;
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            background: #0000FF;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h3>Ridership Recovery of Top 100 Bus Stops from January 2021 - March 2024</h3>
+
+    <input id="slider2" step="1" class="slider" type="range" name="date" value="1" min="1" max="37"
+        oninput="moveSlider2(this.value)">
+    <div id="sliderValue2"></div>
+    <div id="map2"></div>
+
+    <script>
+
+        var map2 = L.map('map2').setView([35.926312628505954, -79.05246734619142], 12.2);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map2);
+
+        var selectedMonth2 = 1
+
+        function createLayer2(selectedMonth) {
+            var pointsLayer2 = new L.FeatureGroup();
+            for (let i = 0; i < 100; i++) {
+                circle = L.circleMarker([data2[i].lat, data2[i].long]).addTo(pointsLayer2)
+                circle.setStyle({ color: getColor(data2[i][selectedMonth]), radius: 4 })
+                circle.addTo(pointsLayer2)
+            }
+            return pointsLayer2;
+        }
+
+        var layer2 = createLayer2(selectedMonth2).addTo(map2);
+
+        function getColor(value) {
+            if (value > 0) {
+                return 'blue'
+            } else {
+                return 'gray'
+            }
+        }
+
+        const slider2 = document.getElementById("slider2");
+        const sliderValueDisplay2 = document.getElementById("sliderValue2");
+
+        const sliderValues2 = [
+            "2021 January",
+            "2021 March",
+            "2021 April",
+            "2021 May",
+            "2021 June",
+            "2021 July",
+            "2021 September",
+            "2021 October",
+            "2021 November",
+            "2021 December",
+            "2022 January",
+            "2022 February",
+            "2022 March",
+            "2022 April",
+            "2022 May",
+            "2022 June",
+            "2022 July",
+            "2022 August",
+            "2022 September",
+            "2022 October",
+            "2022 November",
+            "2022 December",
+            "2023 January",
+            "2023 February",
+            "2023 March",
+            "2023 April",
+            "2023 May",
+            "2023 June",
+            "2023 July",
+            "2023 August",
+            "2023 September",
+            "2023 October",
+            "2023 November",
+            "2023 December",
+            "2024 January",
+            "2024 February",
+            "2024 March\r"
+        ]
+
+        function moveSlider2(value) {
+            const sliderIndex2 = parseInt(slider2.value) - 1;
+            sliderValueDisplay2.textContent = sliderValues2[sliderIndex2];
+            selectedMonth2 = sliderValues2[sliderIndex2];
+            map2.removeLayer(layer2)
+            layer2 = createLayer2(selectedMonth2);
+            layer2.addTo(map2);
+        }
+        moveSlider2(1);
+
+        var legend = L.control({position: 'bottomright'});
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'legend');
+            div.innerHTML += '<div class="legend-item"><div class="legend-color" style="background-color: grey;"></div>Unrecovered</div>';
+            div.innerHTML += '<div class="legend-item"><div class="legend-color" style="background-color: blue;"></div>Recovered</div>';
+            return div;
+        };
+        legend.addTo(map2);
+
+    </script>
+
+
+</body>
+
+</html>
